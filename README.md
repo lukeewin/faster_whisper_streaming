@@ -7,6 +7,11 @@
 ```shell
 pip install -r requirements.txt
 ```
+使用下面命令运行
+```shell
+python app.py
+```
+运行效果可以到我的 B 站中观看 https://www.bilibili.com/video/BV1fosZe7EBt
 # 3. 其它
 博客技术分享博客平台：https://blog.lukeewin.top 或者 https://lukeewin.top
 我的 B 站平台：https://space.bilibili.com/674558378

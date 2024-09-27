@@ -7,9 +7,39 @@
 ```shell
 pip install -r requirements.txt
 ```
-使用下面命令运行
+运行语音识别使用下面命令运行
 ```shell
 python app.py
+```
+如果想要运行对接大模型，必须要先安装 ollama，如何安装 ollama 可以到 https://github.com/ollama/ollama 中查看
+```shell
+python asr_gpt.py
+```
+运行上面命令中默认使用的大模型是千问1.8b 大模型，如果需要替换为其它模型，可以修改源代码，找到下面的源代码中 model 的值，修改为你需要用的大模型，例如下面中的 "model": "qwen:1.8b"
+```python
+def gpt(question):
+    url = "http://localhost:11434/api/chat"
+    headers = {
+        "Content-Type": "application/json"
+    }
+    dialogue_history.append({
+        "role": "user",
+        "content": question
+    })
+    data = {
+        "model": "qwen:1.8b",
+        "messages": dialogue_history,
+        "stream": False
+    }
+    response = requests.post(url, data=json.dumps(data), headers=headers)
+    if response.status_code == 200:
+        response_json = response.json()
+        ai_answer = response_json["message"]["content"]
+        dialogue_history.append({
+            "role": "assistant",
+            "content": ai_answer
+        })
+        return ai_answer
 ```
 运行效果可以到我的 B 站中观看 https://www.bilibili.com/video/BV1fosZe7EBt
 # 3. 其它
